@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpSpeed = 5f;
     [SerializeField] private float _climbSpeed = 5f;
     [SerializeField] private Vector2 deathKick = new Vector2(25f, 25f);
+    [SerializeField] private float layingDeadTime = 2f;
 
     // State
     bool isAlive = true;
@@ -116,8 +117,18 @@ public class Player : MonoBehaviour
     IEnumerator VelocityZero()
     {
         yield return new WaitForSeconds(1);
-        myRigidbody.velocity = new Vector2(0f, 0f);
-        myRigidbody.simulated = false;
+
+        StartCoroutine(StopPlayerMovement());
     }
     
+    IEnumerator StopPlayerMovement()
+    {
+        myRigidbody.velocity = new Vector2(0f, 0f);
+        myRigidbody.simulated = false;
+
+        yield return new WaitForSeconds(layingDeadTime);
+
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
+    }
+
 }

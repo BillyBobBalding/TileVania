@@ -19,8 +19,8 @@ TagManager:
   - Background
   - Enemy
   - Spikes
-  - 
-  - 
+  - Interactables
+  - Exit
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 178420267
+    locked: 0
+  - name: Interactables
+    uniqueID: 3229820907
     locked: 0
